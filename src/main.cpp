@@ -22,7 +22,7 @@ struct TicTacToe {
  * @param grid
  * @return initialized board board with dots
  */
-void initialize_board (char grid[3][3]) {
+void initialize_grid(char grid[3][3]) {
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             grid[x][y]='.';
@@ -33,10 +33,10 @@ void initialize_board (char grid[3][3]) {
 
 /**
  * Desc: Draws board
- * @param grid A 3x3 tic-tac-toe grid
+ * @param grid
  * @return: prints board to console
  */
-void drawBoard(char grid[3][3]) {
+void drawGrid(char grid[3][3]) {
     for (int x = 0; x < 3; x++) {
         cout << endl;
         for (int y = 0; y < 3; y++) {
@@ -57,7 +57,8 @@ bool isFieldTaken(char grid[3][3], int x, int y) {
 
 /**
  * Desc: Gets player's input as coordinates and places character 'x' on that spot.
- * @param player, grid
+ * @param player
+ * @param grid
  * @return Places character 'x' on grid
  */
 void getPlayerInput(char player, char grid[3][3]){
@@ -116,14 +117,88 @@ char checkWin (char grid[3][3]) {
 }
 
 
-int
+int negaMax(char grid[3][3], char player, char AIbot);
+
+/**
+ * Desc: Picks the best move given the current board.
+ * @param grid
+ * @param player
+ * @param AIbot
+ * @return
+ */
+int pickBestMove(char grid[3][3], char player, char AIbot) {
+    int bestMoveScore = -9999;
+    int bestMoveRow = -9999;
+    int bestMoveCol = -9999;
+    int thisMoveScore = 0;
+
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            if (grid[x][y] = '.') {
+                grid[x][y] = player;
+                thisMoveScore = -(negaMax(grid, AIbot, player));
+                grid[x][y] = '.';
+                if (thisMoveScore >= bestMoveScore) {
+                    bestMoveScore = thisMoveScore;
+                    bestMoveRow = x;
+                    bestMoveCol = y;
+                }
+
+            }
+        }
+    }
+
+    return (10*bestMoveRow + bestMoveCol);
+}
+
+/**
+ * Desc: Plays out every possible position
+ * @param grid
+ * @param player
+ * @param AIbot
+ * @return bestMoveScore to pickBestMove
+ */
+int negaMax(char grid[3][3], char player, char AIbot) {
+    int bestMoveScore = -9999;
+    int thisMoveScore = 0;
+
+    // if human wins, score increases
+    if (checkWin(grid) == player)
+        return 1000;
+    // if AIbot wins, score decreases
+    else if (checkWin(grid) == AIbot)
+        return -1000;
+
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            if (grid[x][y] = '.') {
+                grid[x][y] = player;
+                thisMoveScore = -(negaMax(grid, AIbot, player));
+                grid[x][y] = '.';
+                if (thisMoveScore >= bestMoveScore) {
+                    bestMoveScore = thisMoveScore;
+                }
+            }
+        }
+    }
+
+    if (bestMoveScore == 0 || bestMoveScore == -9999)
+        return 0;
+    else if (bestMoveScore < 0)
+        return bestMoveScore + 1;
+    else if (bestMoveScore > 0)
+        return bestMoveScore -1;
+
+}
 
 
 
 
 /**
  * Desc: Plays game, player vs AI bot
- * @param player, AIbot, grid
+ * @param grid
+ * @param player
+ * @param AIbot
  * @return a played game
  */
 void playGame(char grid[3][3], char player, char AIbot) {
@@ -131,7 +206,25 @@ void playGame(char grid[3][3], char player, char AIbot) {
     while (move < 9) {
         getPlayerInput(player, grid);
         move++;
-        drawBoard(grid);
+        drawGrid(grid);
+        if (checkWin(grid)) {
+            cout << "Wow, you've actually won..." << endl;
+            exit(1);
+        }
+        if (move == 9)
+            break;
+        int nextMove = pickBestMove(grid, AIbot, player);
+        int x = nextMove / 10;
+        int y = nextMove % 10;
+        grid[x][y] = AIbot;
+        move++;
+        drawGrid(grid);
+        if (checkWin(grid)) {
+            cout << "That was too easy! Humans are so petty, we robots will dominate the Earth!" << endl;
+            cout << "However...I'll take pity on you. Your best move would have been at coordinates " << "( " << nextMove/10 + 1 << ", " << nextMove % 10 + 1 <<")" << endl;
+            exit(2);
+        }
+        cout << "It's a draw! If the computer could glare, it would be doing so right now!" << endl;
     }
 
 }
@@ -141,9 +234,10 @@ void playGame(char grid[3][3], char player, char AIbot) {
 
 int main() {
     TicTacToe newGame;
-    initialize_board(newGame.grid);
-    drawBoard(newGame.grid);
-    getPlayerInput('x', newGame.grid);
-    drawBoard(newGame.grid);
+    initialize_grid(newGame.grid);
+    newGame.player='x';
+    newGame.AIbot='o';
+    drawGrid(newGame.grid);
+    playGame(newGame.grid, newGame.player, newGame.AIbot);
     return 0;
 };
