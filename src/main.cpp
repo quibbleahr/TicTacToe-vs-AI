@@ -1,44 +1,62 @@
+/*********************************************************************
+ ** Filename: main.cpp
+ ** @author Arianna Leah Fischer
+ ** @date 07/20/2017
+ ** Description: Tic tac toe (1 player and 2 player)
+ *********************************************************************/
+
+
 #include <iostream>
 
 using namespace std;
-char matrix[3][3] {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-char player = 'X';
 
-// draws matrix for tic-tac-toe
-void draw() {
-    cout << "Tic-Tac-Toe" << endl;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            cout << matrix[i][j] << " ";
+struct TicTacToe {
+    char grid[3][3];
+    char player;
+    char bot;
+};
+
+
+/**
+ * Desc: Initializes board with dots
+ * @param grid[3][3]
+ * @return initialized board board with dots
+ */
+void initialize_board (char grid[3][3]) {
+    for (int x = 0; x < 3; x++) {
+        for (int y = 0; y < 3; y++) {
+            grid[x][y]='.';
         }
-        cout << endl;
     }
 }
-// gets the player input and updates matrix
-void playerInput() {
-    int a;
-    cout << "Press the number of the field: ";
-    cin >> a;
 
-    a--;
-    matrix[a/3][a%3] = player;
 
+/**
+ * Desc: Draws board
+ * @param grid[3][3] A 3x3 tic-tac-toe grid
+ * @return: prints board to console
+ */
+void drawBoard(char grid[3][3]) {
+    for (int x = 0; x < 3; x++) {
+        cout << endl;
+        for (int y = 0; y < 3; y++) {
+            cout << " ";
+            cout << grid[x][y];
+        }
+    }
+    cout << endl << endl;
 }
-// changes player from X to O, default is X
-void changePlayer() {
-    if (player == 'X')
-        player = 'O';
 
-    else player = 'X';
-}
+/**
+ *
+ * @return
+ */
+
 
 
 int main() {
-    draw();
-    while (1) {
-        playerInput();
-        draw();
-        changePlayer();
-    }
+    TicTacToe newGame;
+    initialize_board(newGame.grid);
+    drawBoard(newGame.grid);
     return 0;
-}
+};
