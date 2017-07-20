@@ -1,2 +1,2 @@
-# simple_tic-tac-toe
-A simple text-based implementation of the tic-tac-toe game.
+# TicTacToe vs. AI
+Play TicTacToe against an unbeatable AI.
