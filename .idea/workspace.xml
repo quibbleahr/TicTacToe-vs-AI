@@ -11,13 +11,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fc89944-ffd8-44f5-8316-3e8922c91e58" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Tic-Tac_Toe.iml" afterPath="$PROJECT_DIR$/.idea/Tic-Tac_Toe.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.cpp" afterPath="$PROJECT_DIR$/src/main.cpp" />
-    </list>
+    <list default="true" id="5fc89944-ffd8-44f5-8316-3e8922c91e58" name="Default" comment="" />
     <ignored path="Tic-Tac_Toe.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,7 +71,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2" />
+    <option name="x" value="1922" />
     <option name="y" value="39" />
     <option name="width" value="956" />
     <option name="height" value="977" />
@@ -313,15 +307,15 @@
       <workItem from="1492038700691" duration="106000" />
       <workItem from="1500476828730" duration="657000" />
       <workItem from="1500499543543" duration="333000" />
-      <workItem from="1500539845759" duration="4239000" />
+      <workItem from="1500539845759" duration="4464000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8686000" />
+    <option name="totallyTimeSpent" value="8911000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="39" width="956" height="977" extended-state="4" />
+    <frame x="1922" y="39" width="956" height="977" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23012552" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
