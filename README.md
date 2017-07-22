@@ -6,7 +6,9 @@ Play TicTacToe against the NegaMax AI. You'll never beat it, but you can try...
 
 Clone the repo. Change to the ```/src``` directory and then run the program by typing ```$ ./a.out ```.
 
-### Example clip
+### Demo
+Demo resulting in a draw.
 
-![cat's-game](https://raw.githubusercontent.com/quibbleahr/TicTacToe-vs-AI/tree/master/media/tic-tac-toe_catsgame.gif)
+![Demo](https://user-images.githubusercontent.com/17093153/28493481-4e2699cc-6f18-11e7-87c3-60b7cf8bff88.gif)
 
+Other images of game are available in the ```/media``` directory.
