@@ -11,4 +11,4 @@ Demo resulting in a draw.
 
 ![Demo](https://user-images.githubusercontent.com/17093153/28493481-4e2699cc-6f18-11e7-87c3-60b7cf8bff88.gif)
 
-Other images of game are available in the ```/media``` directory.
+Other images of game are available in the ```/screenshots``` directory.
