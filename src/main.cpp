@@ -2,11 +2,13 @@
  ** Filename: main.cpp
  ** @author Arianna Leah Fischer
  ** @date 07/20/2017
- ** Description: Tic tac toe (1 player and 2 player)
+ ** Description: Tic tac toe
  *********************************************************************/
 
 
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 using namespace std;
 
@@ -46,11 +48,21 @@ void drawGrid(char grid[3][3]) {
     }
     cout << endl << endl;
 }
-
+/**
+ * Desc: checks if value is between 1 and 3 inclusive
+ * @param in
+ * @return true if in bounds, false otherwise
+ */
 bool isInBounds(int in) {
     return (in >= 1 && in <= 3);
 }
-
+/**
+ * Desc: checks if field in question is taken
+ * @param grid
+ * @param x
+ * @param y
+ * @return true if field is taken, false otherwise
+ */
 bool isFieldTaken(char grid[3][3], int x, int y) {
     return (grid[x-1][y-1] != '.');
 }
@@ -117,7 +129,7 @@ char checkWin (char grid[3][3]) {
 }
 
 
-int negaMax(char grid[3][3], char player, char AIbot);
+int negaMax(char grid[3][3], char player1, char player2);
 
 /**
  * Desc: Picks the best move given the current board.
@@ -134,7 +146,7 @@ int pickBestMove(char grid[3][3], char player, char AIbot) {
 
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
-            if (grid[x][y] = '.') {
+            if (grid[x][y] == '.') {
                 grid[x][y] = player;
                 thisMoveScore = -(negaMax(grid, AIbot, player));
                 grid[x][y] = '.';
@@ -154,26 +166,26 @@ int pickBestMove(char grid[3][3], char player, char AIbot) {
 /**
  * Desc: Plays out every possible position
  * @param grid
- * @param player
- * @param AIbot
+ * @param player1
+ * @param player2
  * @return bestMoveScore to pickBestMove
  */
-int negaMax(char grid[3][3], char player, char AIbot) {
+int negaMax(char grid[3][3], char player1, char player2) {
     int bestMoveScore = -9999;
     int thisMoveScore = 0;
 
     // if human wins, score increases
-    if (checkWin(grid) == player)
+    if (checkWin(grid) == player1)
         return 1000;
-    // if AIbot wins, score decreases
-    else if (checkWin(grid) == AIbot)
+    // if player2 wins, score decreases
+    else if (checkWin(grid) == player2)
         return -1000;
 
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
-            if (grid[x][y] = '.') {
-                grid[x][y] = player;
-                thisMoveScore = -(negaMax(grid, AIbot, player));
+            if (grid[x][y] == '.') {
+                grid[x][y] = player1;
+                thisMoveScore = -(negaMax(grid, player2, player1));
                 grid[x][y] = '.';
                 if (thisMoveScore >= bestMoveScore) {
                     bestMoveScore = thisMoveScore;
@@ -197,14 +209,14 @@ int negaMax(char grid[3][3], char player, char AIbot) {
 /**
  * Desc: Plays game, player vs AI bot
  * @param grid
- * @param player
+ * @param player1
  * @param AIbot
  * @return a played game
  */
-void playGame(char grid[3][3], char player, char AIbot) {
+void playGame(char grid[3][3], char player1, char AIbot) {
     int move = 0;
     while (move < 9) {
-        getPlayerInput(player, grid);
+        getPlayerInput(player1, grid);
         move++;
         drawGrid(grid);
         if (checkWin(grid)) {
@@ -213,7 +225,7 @@ void playGame(char grid[3][3], char player, char AIbot) {
         }
         if (move == 9)
             break;
-        int nextMove = pickBestMove(grid, AIbot, player);
+        int nextMove = pickBestMove(grid, AIbot, player1);
         int x = nextMove / 10;
         int y = nextMove % 10;
         grid[x][y] = AIbot;
@@ -224,9 +236,8 @@ void playGame(char grid[3][3], char player, char AIbot) {
             cout << "However...I'll take pity on you. Your best move would have been at coordinates " << "( " << nextMove/10 + 1 << ", " << nextMove % 10 + 1 <<")" << endl;
             exit(2);
         }
-        cout << "It's a draw! If the computer could glare, it would be doing so right now!" << endl;
     }
-
+    cout << "It's a draw! The computer is getting angrier!" << endl;
 }
 
 
