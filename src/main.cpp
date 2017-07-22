@@ -3,6 +3,7 @@
  ** @author Arianna Leah Fischer
  ** @date 07/20/2017
  ** Description: Tic tac toe
+ ** Adapted from: http://code.runnable.com/Vnjjxm6IJit89Bpu/tic-tac-toe-unbeatable-ai-for-c%2B%2B
  *********************************************************************/
 
 
