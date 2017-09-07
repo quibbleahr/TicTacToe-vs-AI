@@ -130,7 +130,7 @@ char checkWin (char grid[3][3]) {
 }
 
 
-int negaMax(char grid[3][3], char player1, char player2);
+int negaMax(char grid[3][3], char player1, char AIbot);
 
 /**
  * Desc: Picks the best move given the current board.
@@ -168,25 +168,25 @@ int pickBestMove(char grid[3][3], char player, char AIbot) {
  * Desc: Plays out every possible position
  * @param grid
  * @param player1
- * @param player2
+ * @param AIbot
  * @return bestMoveScore to pickBestMove
  */
-int negaMax(char grid[3][3], char player1, char player2) {
+int negaMax(char grid[3][3], char player1, char AIbot) {
     int bestMoveScore = -9999;
     int thisMoveScore = 0;
 
     // if human wins, score increases
     if (checkWin(grid) == player1)
         return 1000;
-    // if player2 wins, score decreases
-    else if (checkWin(grid) == player2)
+    // if AIbot wins, score decreases
+    else if (checkWin(grid) == AIbot)
         return -1000;
 
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             if (grid[x][y] == '.') {
                 grid[x][y] = player1;
-                thisMoveScore = -(negaMax(grid, player2, player1));
+                thisMoveScore = -(negaMax(grid, AIbot, player1));
                 grid[x][y] = '.';
                 if (thisMoveScore >= bestMoveScore) {
                     bestMoveScore = thisMoveScore;
